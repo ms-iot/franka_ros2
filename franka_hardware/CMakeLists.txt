@@ -39,6 +39,7 @@ ament_target_dependencies(
         rclcpp
         franka_msgs
 )
+set_target_properties(franka_hardware PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 pluginlib_export_plugin_description_file(hardware_interface franka_hardware.xml)
 
 

@@ -22,6 +22,7 @@
 #include <ratio>
 #include <string>
 #include <vector>
+#include <math.h>
 
 #include "angles/angles.h"
 #include "builtin_interfaces/msg/duration.hpp"

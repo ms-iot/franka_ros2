@@ -8,6 +8,8 @@ endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra)
+else()
+  add_definitions(-D_USE_MATH_DEFINES)
 endif()
 
 find_package(ament_cmake REQUIRED)
@@ -40,7 +42,7 @@ ament_target_dependencies(joint_effort_trajectory_controller
         trajectory_msgs
         control_toolbox
         )
-
+target_compile_definitions(joint_effort_trajectory_controller PRIVATE "JOINT_TRAJECTORY_CONTROLLER_BUILDING_DLL")
 pluginlib_export_plugin_description_file(controller_interface joint_trajectory_plugin.xml)
 
 install(DIRECTORY include/

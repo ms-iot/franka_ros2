@@ -8,6 +8,8 @@ endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     add_compile_options(-Wall -Wextra -Wpedantic)
+else()
+    add_definitions(-D_USE_MATH_DEFINES)
 endif()
 
 find_package(ament_cmake REQUIRED)
@@ -25,6 +27,7 @@ find_package(Franka REQUIRED)
 add_library(gripper_server SHARED
         src/gripper_action_server.cpp)
 target_link_libraries(gripper_server Franka::Franka)
+set_target_properties(gripper_server PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 target_include_directories(gripper_server PRIVATE
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>)

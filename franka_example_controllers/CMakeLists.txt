@@ -8,6 +8,8 @@ endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     add_compile_options(-Wall -Wextra -Wpedantic)
+else()
+    add_definitions(-D_USE_MATH_DEFINES)
 endif()
 
 option(CHECK_TIDY "Adds clang-tidy tests" OFF)
@@ -35,6 +37,8 @@ target_include_directories(
         include
         ${EIGEN3_INCLUDE_DIRS}
 )
+set_target_properties(${PROJECT_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
+
 ament_target_dependencies(
         ${PROJECT_NAME}
         controller_interface

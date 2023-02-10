@@ -51,7 +51,7 @@ controller_interface::return_type MoveToStartExampleController::update() {
   auto motion_generator_output = motion_generator_->getDesiredJointPositions(trajectory_time);
   Vector7d q_desired = motion_generator_output.first;
   bool finished = motion_generator_output.second;
-  if (not finished) {
+  if (!finished) {
     const double kAlpha = 0.99;
     dq_filtered_ = (1 - kAlpha) * dq_filtered_ + kAlpha * dq_;
     Vector7d tau_d_calculated =
@@ -94,7 +94,7 @@ MoveToStartExampleController::on_configure(const rclcpp_lifecycle::State& /*prev
     RCLCPP_FATAL(node_->get_logger(), "k_gains parameter not set");
     return CallbackReturn::FAILURE;
   }
-  if (k_gains.size() != static_cast<uint>(num_joints)) {
+  if (k_gains.size() != static_cast<uint32_t>(num_joints)) {
     RCLCPP_FATAL(node_->get_logger(), "k_gains should be of size %d but is of size %d", num_joints,
                  k_gains.size());
     return CallbackReturn::FAILURE;
@@ -103,7 +103,7 @@ MoveToStartExampleController::on_configure(const rclcpp_lifecycle::State& /*prev
     RCLCPP_FATAL(node_->get_logger(), "d_gains parameter not set");
     return CallbackReturn::FAILURE;
   }
-  if (d_gains.size() != static_cast<uint>(num_joints)) {
+  if (d_gains.size() != static_cast<uint32_t>(num_joints)) {
     RCLCPP_FATAL(node_->get_logger(), "d_gains should be of size %d but is of size %d", num_joints,
                  d_gains.size());
     return CallbackReturn::FAILURE;
